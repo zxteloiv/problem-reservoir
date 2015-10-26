@@ -22,9 +22,14 @@ class Query extends CI_Controller {
 	{
         $data = array();
         $data['title'] = '题库查询';
+        $data['active_title'] = 'query';
 		$this->load->view('templates/header', $data);
 
-        echo "<p>hello world</p>";
+        $this->load->model('Problem');
+        $val = $this->Problem->getProblemByID(1);
+
+        $debug['msg'] = var_export($val, true);
+        $this->load->view('debug', $debug);
 
 		$this->load->view('templates/footer', $data);
 	}

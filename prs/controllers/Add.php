@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Add extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,13 +21,11 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
         $data = array();
-        $data['title'] = '首页 - 题库系统';
-        $data['active_title'] = '';
-
+        $data['title'] = '题库增加';
+        $data['active_title'] = 'add';
 		$this->load->view('templates/header', $data);
 
-        $debug['msg'] = 'Homepage';
-		$this->load->view('debug', $debug);
+        //echo "<p>hello world</p>";
 
 		$this->load->view('templates/footer', $data);
 	}
