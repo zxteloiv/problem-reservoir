@@ -41,7 +41,7 @@ class Problem extends CI_Model {
             'keypoints' => $param['keypoints']
         );
 
-        $this->db->insert('problems', $data);
+        return $this->db->insert('problems', $data);
     }
 
     function updateProblemByID($pid, $param) {
