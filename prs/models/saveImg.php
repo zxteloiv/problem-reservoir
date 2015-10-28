@@ -11,6 +11,7 @@ class SaveImg extends CI_Model {
     function __construct() {
         parent::__construct();
         $this->db = $this->load->database('prs', true);
+        $this->load->helper('utils');
     }
 
     function do_the_job($param) {
@@ -84,7 +85,7 @@ class SaveImg extends CI_Model {
             );
             $rtn = $this->db->insert('img_attachment', $data, true);
             if (!$rtn) {
-                $this->outputError(self::DB_INSERTION_FAILURE, 'failed to insert db');
+                echo outputError(self::DB_INSERTION_FAILURE, 'failed to insert db');
                 return false;
             }
 
@@ -94,23 +95,16 @@ class SaveImg extends CI_Model {
         return true;
     }
 
-    function outputError($errno, $errmsg) {
-        $rtn = array(
-            'errno' => $errno,
-            'errmsg' => $errmsg
-        );
-        echo json_encode($rtn);
-    }
-
     function decodeFilesParam() {
         if (!isset($this->post['files'])) {
-            $this->outputError(self::INPUT_KEY_NOT_SET, 'input key missing');
+            echo outputError(self::INPUT_KEY_NOT_SET, 'input key missing');
             return false;
         }
 
         $decoded_files = json_decode($this->post['files'], true);
+        echo $this->post['files']."\n";
         if ($decoded_files === null) {
-            $this->outputError(self::FILE_JSON_NOT_VALID,
+            echo outputError(self::FILE_JSON_NOT_VALID,
                 'file json is not valid');
 
             return false;
@@ -128,14 +122,6 @@ class SaveImg extends CI_Model {
 
             $content = base64_decode($file['content']);
             
-            /* different base64 routine may result different decoded binary
-            if (strlen($content) != intval($file['size'])) {
-                $this->outputError(self::FILE_SIZE_INCONSISTENT,
-                    'file is incomplete');
-                return false;
-            }
-             */
-
             // add to the file queue
             $img_queue[] = array(
                 'name' => $file['name'],
@@ -152,7 +138,7 @@ class SaveImg extends CI_Model {
     function isValidFile($file) {
         if (!(isset($file['name']) && isset($file['size']) && isset($file['type'])
             && isset($file['content']))) {
-            $this->outputError(self::FILE_KEY_NOT_SET, 'file param is not set correctly');
+            echo outputError(self::FILE_KEY_NOT_SET, 'file param is not set correctly');
             return false;
         }
 
@@ -161,12 +147,12 @@ class SaveImg extends CI_Model {
 
     function isValidParam($param) {
         if (!isset($param['filecount']) || !isset($param['files'])) {
-            $this->outputError(self::INPUT_KEY_NOT_SET, 'param is not valid');
+            echo outputError(self::INPUT_KEY_NOT_SET, 'param is not valid');
             return false;
         }
 
         if (intval($param['filecount']) != count($param['files'])) {
-            $this->outputError(self::FILE_COUNT_INCONSISTENT, 'file count inconsistent');
+            echo outputError(self::FILE_COUNT_INCONSISTENT, 'file count inconsistent');
             return false;
         }
 
