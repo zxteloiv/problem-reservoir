@@ -22,12 +22,17 @@ class Welcome extends CI_Controller {
 	{
         $data = array();
         $data['title'] = '首页 - 题库系统';
-        $data['active_title'] = '';
+        $data['active_title'] = 'home';
 
 		$this->load->view('templates/header', $data);
 
-        $debug['msg'] = 'Homepage';
-		$this->load->view('debug', $debug);
+		$this->load->view('welcome_message', $data);
+
+        $this->load->model('ProblemOp');
+        $val = $this->ProblemOp->getProblemByID(8);
+
+        $debug['msg'] = var_export($val, true);
+        $this->load->view('debug', $debug);
 
 		$this->load->view('templates/footer', $data);
 	}

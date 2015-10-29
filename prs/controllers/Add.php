@@ -25,7 +25,7 @@ class Add extends CI_Controller {
         $data['active_title'] = 'add';
 		$this->load->view('templates/header', $data);
 
-        //echo "<p>hello world</p>";
+		$this->load->view('add', $data);
 
 		$this->load->view('templates/footer', $data);
 	}

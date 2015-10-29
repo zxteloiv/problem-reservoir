@@ -25,11 +25,7 @@ class Query extends CI_Controller {
         $data['active_title'] = 'query';
 		$this->load->view('templates/header', $data);
 
-        $this->load->model('Problem');
-        $val = $this->Problem->getProblemByID(1);
-
-        $debug['msg'] = var_export($val, true);
-        $this->load->view('debug', $debug);
+		$this->load->view('query', $data);
 
 		$this->load->view('templates/footer', $data);
 	}
