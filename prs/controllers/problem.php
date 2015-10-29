@@ -7,14 +7,18 @@ class Problem extends CI_Controller {
         parent::__construct();
         $this->get = $this->input->get();
         $this->post = $this->input->post();
+        $this->load->model('ProblemOp');
     }
 
 	public function index() {
-        
         return;
 	}
 
     public function byID($pid) {
+        $data = $this->ProblemOp->getProblemByID($pid);
+        echo json_encode(array('errno' => 0, 'errmsg' => 'success',
+            'data' => array($data)
+        ));
         return;
     }
 
@@ -23,10 +27,14 @@ class Problem extends CI_Controller {
     }
 
     public function create() {
+        $this->ProblemOp->doCreation($this->post);
+    }
+
+    public function update() {
+        $this->ProblemOp->doUpdating($this->post);
     }
 
     public function del() {
-        $this->load->model('ProblemOp');
         $this->ProblemOp->doDeletion($this->post);
     }
 }
