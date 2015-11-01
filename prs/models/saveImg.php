@@ -102,7 +102,6 @@ class SaveImg extends CI_Model {
         }
 
         $decoded_files = json_decode($this->post['files'], true);
-        echo $this->post['files']."\n";
         if ($decoded_files === null) {
             echo outputError(self::FILE_JSON_NOT_VALID,
                 'file json is not valid');
