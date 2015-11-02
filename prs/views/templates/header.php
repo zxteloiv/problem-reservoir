@@ -15,6 +15,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     vertical-align: middle;
     float: none;
 }
+
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.inner {
+  padding: 30px;
+}
+
+.cover {
+  padding: 0 20px;
+}
+.cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
     </style>
 </head>
 <body>

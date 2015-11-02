@@ -2,11 +2,22 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>homepage</h1>
 
-<div id="container">
+<div class="cover-container">
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+    <div class="inner cover">
+        <h1 class="cover-heading">欢迎使用题库系统.</h1>
+        <p class="lead">通过录入题目和题目的不同属性，来实现试题的便捷管理。使用不同的筛选条件，使得组卷变得更加容易。</p>
+        <p class="lead">
+        <a class="btn btn-lg btn-default" href="query">查询题目</a>
+        </p>
+    </div>
+
+    <div class="mastfoot">
+        <div class="inner">
+            <p>Made by <a href="http://getbootstrap.com/">Bootstrap</a> Copyright 2015 </p>
+        </div>
+    </div>
 
 </div>
 

@@ -28,12 +28,6 @@ class Welcome extends CI_Controller {
 
 		$this->load->view('welcome_message', $data);
 
-        $this->load->model('ProblemOp');
-        $val = $this->ProblemOp->getProblemByID(8);
-
-        $debug['msg'] = var_export($val, true);
-        $this->load->view('debug', $debug);
-
 		$this->load->view('templates/footer', $data);
 	}
 }
