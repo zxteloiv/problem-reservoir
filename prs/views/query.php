@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
   </div>
 
-  <div id="result_container" class="">
+  <div id="result_container" class="hidden">
       <table class="table table-striped table-bordered" id="query_result">
           <caption>查询结果</caption>
           <thead>
@@ -101,11 +101,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </li>
           </ul>
       </nav>
+      <input type="hidden" value="" id="querypage" />
   </div>
 
-  <div id="selected_problems" class="panel panel-info">
-      <div class="panel-heading">所选题目</div>
-      <div class="panel-body">
+  <div class="panel panel-info">
+      <div class="panel-heading">所选题目
+      </div>
+      <p id="summary" class="hidden">summary:<span id="summary_points"></span></p>
+      <div class="panel-body" id="select_problems_content">
       </div>
   </div>
 

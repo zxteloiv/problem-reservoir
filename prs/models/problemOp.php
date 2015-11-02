@@ -174,6 +174,7 @@ class ProblemOp extends CI_Model {
 
         $this->db->where('problem_id', $pid, true);
         $rtn = $this->db->delete('problems');
+        // it may be wiser to delete attachments later on in maintaining process
 
         if ($rtn && $this->db->affected_rows() > 0) {
             echo json_encode(array( 'errno' => 0, 'errmsg' => 'delete success'));

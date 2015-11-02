@@ -17,11 +17,19 @@ if (typeof jQuery === 'undefined') {
         $('#difficulty option:eq(0)').prop('selected', true);
         $('#pid').val('');
     });
+
+    $('#filters').change(function(){
+        $('#querypage').val('');
+    });
 }(jQuery);
 
 // Bind function to search button:
 // Build a query parameter and send it to API using ajax.
 var handleSearchClick = function(evt) {
+    doSearch();
+};
+
+var doSearch = function() {
     var raw_params = {
         course: $('#course').val(),
         chapter: $('#chapter').val(),
@@ -29,6 +37,7 @@ var handleSearchClick = function(evt) {
         difficulty: parseInt($('#difficulty').val()),
         description: $('#description').val(),
         points: parseInt($('#points').val()),
+        page: parseInt($('#querypage').val())
     };
     var params = {};
     for (var k in raw_params) {
@@ -49,7 +58,6 @@ var handleSearchClick = function(evt) {
         success: onSearchAjaxSuccess,
         error: onSearchAjaxError
     });
-
 };
 
 var onSearchAjaxError = function(jqXHR, state, err) {
@@ -86,7 +94,7 @@ var initQueryResult = function(data) {
         var id = $('<td>').addClass('col-md-1').text(problem['pid']);
         var prop = $('<td>').addClass('col-md-3');
         var content = $('<td>').addClass('col-md-6').css('max-width', '100%');
-        var op = $('<td>').addClass('col-md-2').text('op');
+        var op = $('<td>').addClass('col-md-2');
 
         initProblemProperties(problem, prop);
         initProblemContent(problem, content);
@@ -101,7 +109,85 @@ var initQueryResult = function(data) {
 };
 
 var initOperationButton = function(problem, op) {
+    var pid = problem['pid'];
+    var points = problem['points'];
+    var del_btn = $('<button>')
+        .addClass('btn btn-danger')
+        .attr('del_pid', pid)
+        .append($('<span>').addClass('glyphicon glyphicon-remove').text('删除'))
+        .click(handleDelBtnClick)
+        ;
+
+    var select_btn = $('<button>')
+        .addClass('btn btn-success')
+        .attr('select_pid', pid)
+        .attr('points', points)
+        .append($('<span>').addClass('glyphicon glyphicon-ok').text('选中'))
+        .click(handleSelectBtnClick)
+        ;
+
+    var group = $('<div>')
+        .addClass('btn-group')
+        .attr('role', 'group')
+        .append(del_btn).append(select_btn)
+        ;
+
+    op.append(group);
+};
+
+var handleDelBtnClick = function(evt) {
+    var del_btn = $(this);
+    if (!confirm('确定从题库中删除此题吗?')) { return; }
+
+    var row = del_btn.closest('tr');
+    var pid = del_btn.attr('del_pid');
+
+    $.ajax('problem/del', {
+        method: 'POST',
+        dataType: 'json',
+        data: {pid: pid},
+        success: function(data, state, jqXHR) {
+            if (!data || !('errno' in data) || !('errmsg' in data)) {
+                alert('服务器连接失败');
+                return;
+            }
+
+            if (data['errno'] > 0) {
+                alert(data['errno'] + ":" + data['errmsg']);
+                return;
+            }
+
+            row.remove();
+        },
+        error: function(jqXHR, state, err) {
+            alert(state + ":" + err);
+            return;
+        }
+    });
+};
     
+var handleSelectBtnClick = function(evt) {
+    var select_btn = $(this);
+    var pid = select_btn.attr('select_pid');
+    var problem_points = parseInt(select_btn.attr('points'));
+    var row = select_btn.closest('tr');
+
+    var new_row = $('<div>').addClass('row')
+        .attr('pid', pid).attr('points', problem_points);
+    var summary = $('#summary').removeClass('hidden');
+    var points = parseInt($('#summary_points').text());
+
+    if (!points) { points = 0; }
+    if (!problem_points) { problem_points = 0; }
+
+    points += problem_points;
+    $('#summary_points').text(points);
+
+    var contents = row.find('img');
+    contents.detach().after($('<br/>'));
+    new_row.append(contents);
+    $('#select_problems_content').append(new_row).append($('<hr/>'));
+    row.remove();
 };
 
 var initProblemContent = function(problem, content) {
@@ -166,6 +252,7 @@ var initPagination = function(pageid, pagenum) {
         var previous = $('<li>').append($('<a>').attr('pageid', pageid - 1).append(
             $('<span>').addClass('glyphicon-backward glyphicon')
         ));
+        previous.click(getHandlerOnPageClick(pageid - 1));
         pagination.append(previous);
     }
 
@@ -174,6 +261,7 @@ var initPagination = function(pageid, pagenum) {
         if (val < 1 || pagenum < val) { continue; }
 
         var page = $('<li>').append($('<a>').attr('pageid', val).text(val));
+        page.click(getHandlerOnPageClick(val));
         if (pageid == val) {
             page.addClass('active');
         }
@@ -184,10 +272,19 @@ var initPagination = function(pageid, pagenum) {
         var next = $('<li>').append( $('<a>').attr('pageid', pageid + 1).append(
             $('<span>').addClass('glyphicon-forward glyphicon')
         ));
+        next.click(getHandlerOnPageClick(pageid + 1));
         pagination.append(next);
     }
 
     $('#result_container').removeClass('hidden');
+};
+
+var getHandlerOnPageClick = function(desired_page) {
+    return function(evt) {
+        var page = $(this);
+        $('#querypage').val(desired_page);
+        doSearch();
+    };
 };
 
 +function($) {

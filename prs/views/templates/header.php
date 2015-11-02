@@ -6,8 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
     <title><?php echo $title; ?></title>
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css" media="all">
+
 </head>
 <body>
 
