@@ -149,10 +149,6 @@ var saveProblem = function(idmap) {
                     var e = $(this);
                     e.wrap('<form>').closest('form').get(0).reset();
                     e.unwrap();
-
-                    // Prevent form submission
-                    e.stopPropagation();
-                    e.preventDefault();
                 })
                 ;
             alert('保存成功');
