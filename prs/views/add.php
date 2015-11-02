@@ -11,9 +11,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="panel panel-primary">
         <div class="panel-heading">题目属性</div>
         <div class="panel-body">
-            <div class="row form-inline">
+            <div class="row">
 
-                <div class="col-md-4 form-group">
+                <div class="col-md-4">
                     <label for="course">科目：</label>
                     <select class="form-control" id="course">
                         <option value="1">自动控制原理</option>
@@ -21,26 +21,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </select>
                 </div>
 
-                <div class="col-md-4 form-group">
+                <div class="col-md-4">
                     <label for="chapter">章节：</label>
                     <input type="text" value="" id="chapter" class="form-control"/>
                 </div>
 
-                <div class="col-md-4 form-group">
+                <div class="col-md-4">
                     <label for="keypoints">知识点：</label>
                     <input type="text" value="" id="keypoints" class="form-control"/>
                 </div>
 
             </div>
 
-            <div class="row form-inline">
+            <div class="row">
 
-                <div class="col-md-4 form-group">
+                <div class="col-md-4">
                     <label for="points">分值：</span>
                     <input type="number" value="5" id="points" class="form-control"/>
                 </div>
 
-                <div class="col-md-4 form-group">
+                <div class="col-md-4">
                     <label for="difficulty">难度：</label>
                     <select id="difficulty" class="form-control">
                         <option value="10" >容易</option>
@@ -57,17 +57,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="panel panel-primary">
         <div class="panel-heading">题目内容</div>
         <div class="panel-body">
-            <div class="form-group">
+            <div class="row">
                 <label for="description">简单描述：</label>
                 <textarea class="form-control" rows="3" id="description"></textarea>
             </div>
 
-            <div class="form-group">
+            <div class="row">
                 <label>上传题目截图：（多张图片时需要按顺序选择）</label>
                 <button id="new-pic" class="btn btn-primary hidden">新增一张图</button>
             </div>
 
-            <div id="problem-contents" class="form-horizontal">
+            <div id="problem-contents" class="row">
                 <div class="row form-group">
                     <div class="col-md-4">
                         <input type="file" name="file0" id="file0"/>

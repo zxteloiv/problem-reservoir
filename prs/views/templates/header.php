@@ -9,6 +9,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" media="all">
     <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css" media="all">
 
+    <style>
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+    </style>
 </head>
 <body>
 

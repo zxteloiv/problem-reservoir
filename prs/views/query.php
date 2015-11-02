@@ -12,8 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="panel-heading">筛选条件（留空或为0时不用作筛选）</div>
 
         <div class="panel-body " id="filters">
-            <div class="row form-inline">
-                <div class="col-md-3 form-group">
+            <div class="row">
+                <div class="col-md-3">
                     <label for="course">科目：</label>
                     <select class="form-control" id="course">
                         <option value="自动控制原理" selected>自动控制原理</option>
@@ -21,30 +21,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </select>
                 </div>
 
-                <div class="col-md-3 form-group">
+                <div class="col-md-3">
                     <label for="chapter">章节：</label>
                     <input type="text" value="" id="chapter" class="form-control"/>
                 </div>
 
-                <div class="col-md-3 form-group">
+                <div class="col-md-3">
                     <label for="keypoints">知识点：</label>
                     <input type="text" value="" id="keypoints" class="form-control"/>
                 </div>
 
-                <div class="col-md-3 form-group">
+                <div class="col-md-3">
                     <label for="description">备注含有</label>
                     <input type="text" id="description" class="form-control"/>
                 </div>
 
             </div>
 
-            <div class="row form-inline">
-                <div class="col-md-3 form-group">
+            <div class="row">
+                <div class="col-md-3 vcenter">
                     <label for="points">分值：</label>
                     <input type="number" value="0" id="points" class="form-control"/>
-                </div>
-
-                <div class="col-md-3 form-group">
+                </div><!-- the comment is to prevent any blocks to appear
+             --><div class="col-md-3 vcenter">
                     <label for="difficulty">难度：</label>
                     <select id="difficulty" class="form-control">
                         <option value="0" selected ></option>
@@ -53,19 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <option value="50" >较难</option>
                         <option value="70" >很难</option>
                     </select>
-                </div>
-
-                <div class="col-md-3 form-group">
+                </div><!--
+             --><div class="col-md-3 vcenter">
                     <label for="pid" >题目ID：</label>
                     <input id="pid" value="" type="text" class="form-control" />
-                </div>
-
-                <div class="col-md-3">
-                    <p class="text-center">
+                </div><!--
+             --><div class="col-md-3 vcenter">
                     <button class="btn btn-default" id="reset">清空</button>
-                    <span>&nbsp;</span>
                     <button class="btn btn-success" id="search">查询</button>
-                    </p>
                 </div>
             </div>
 
