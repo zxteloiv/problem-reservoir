@@ -2,9 +2,9 @@
 -- version 4.5.0.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Nov 14, 2015 at 03:40 PM
--- Server version: 5.6.27
+-- Host: 127.0.0.1
+-- Generation Time: 2015-12-01 13:08:27
+-- 服务器版本： 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ USE `prs`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `img_attachment`
+-- 表的结构 `img_attachment`
 --
 
 CREATE TABLE `img_attachment` (
@@ -40,7 +40,7 @@ CREATE TABLE `img_attachment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `problems`
+-- 表的结构 `problems`
 --
 
 CREATE TABLE `problems` (
@@ -54,7 +54,10 @@ CREATE TABLE `problems` (
   `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
   `content` longtext NOT NULL COMMENT '内容，json串，list of primitives',
   `keypoints` varchar(255) NOT NULL DEFAULT '''''' COMMENT '知识点',
-  `states` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '问题状态, 0:正常, 1:图片附件失效, etc.'
+  `states` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '问题状态, 0:正常, 1:图片附件失效, etc.',
+  `years` varchar(50) NOT NULL DEFAULT '' COMMENT '考试年份',
+  `backup1` varchar(200) NOT NULL DEFAULT '' COMMENT '补充1',
+  `backup2` varchar(200) NOT NULL DEFAULT '' COMMENT '补充2'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='题库表';
 
 --
